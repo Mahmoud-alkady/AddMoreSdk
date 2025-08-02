@@ -5,6 +5,9 @@ import PackageDescription
 
 let package = Package(
     name: "AdMoreSdk",
+    platforms: [
+        .iOS(.v12), // Minimum iOS version for Swift 4.2 compatibility
+    ],
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
@@ -12,7 +15,9 @@ let package = Package(
             targets: ["AddMoreSdk"]),
     ],
     targets: [
-        .binaryTarget(name: "AddMoreSdk", path: "./AddMoreSdk.xcframework")
-
+        .binaryTarget(
+            name: "AddMoreSdk", 
+            path: "./AddMoreSdk.xcframework"
+        )
     ]
 )

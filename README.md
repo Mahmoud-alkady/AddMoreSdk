@@ -9,6 +9,17 @@ A comprehensive iOS SDK for collecting user and device data for analytics and bu
 - **Comprehensive Coverage**: 20+ data collection categories
 - **Binary Framework**: Source code protected
 
+## 📋 Requirements
+
+- **iOS**: 12.0+
+- **Swift**: 4.2+ (binary framework compiled with Swift 4.2)
+- **Xcode**: 10.0+
+- **Swift Package Manager**: 5.0+
+
+> **Swift Version Compatibility**: This SDK uses a binary framework compiled with Swift 4.2, which is **fully compatible** with Swift 4.2+ projects, including Swift 6.0. The binary framework is pre-compiled and uses Swift ABI stability, so it works seamlessly with newer Swift versions.
+
+> **Note**: The Package.swift uses Swift 6.0 tools for modern SPM support, but the actual framework binary is Swift 4.2 compatible.
+
 ## 📦 Installation
 
 ### Swift Package Manager
