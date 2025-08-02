@@ -4,14 +4,14 @@
 import PackageDescription
 
 let package = Package(
-    name: "AdMoreSdk",
+    name: "AddMoreSdk",
     platforms: [
         .iOS(.v12), // Minimum iOS version for Swift 4.2 compatibility
     ],
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
-            name: "AdMoreSdk",
+            name: "AddMoreSdk",
             targets: ["AddMoreSdk"]),
     ],
     targets: [
