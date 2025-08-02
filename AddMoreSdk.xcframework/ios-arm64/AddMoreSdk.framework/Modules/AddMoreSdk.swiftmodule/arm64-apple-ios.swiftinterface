@@ -1,0 +1,60 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 6.0.3 effective-4.2 (swiftlang-6.0.3.1.10 clang-1600.0.30.1)
+// swift-module-flags: -target arm64-apple-ios12.0 -enable-objc-interop -enable-library-evolution -swift-version 4.2 -enforce-exclusivity=checked -O -enable-bare-slash-regex -module-name AddMoreSdk
+import AdSupport
+import AppTrackingTransparency
+import SystemConfiguration.CaptiveNetwork
+import CommonCrypto
+import Contacts
+import CoreBluetooth
+import CoreLocation
+import CoreMotion
+import CoreNFC
+import CoreTelephony
+import DeviceActivity
+import EventKit
+import FamilyControls
+import Foundation
+import HealthKit
+import ImageIO
+import ManagedSettings
+import MediaPlayer
+import MessageUI
+import MusicKit
+import Network
+import Photos
+import Security
+import StoreKit
+import Swift
+import SystemConfiguration
+import UIKit
+import _Concurrency
+import _CoreNFC_UIKit
+import _StringProcessing
+import _SwiftConcurrencyShims
+public class AddMoreFeatureManager : AddMoreSdk.FeatureManagerInterface {
+  public static let shared: AddMoreSdk.AddMoreFeatureManager
+  public init()
+  public func start(uniqueKey: Swift.String)
+  public func sendEvent(data: [Swift.String : Any] = [:])
+  @objc deinit
+}
+public struct InvalidDataResponse : Swift.Error, Foundation.LocalizedError {
+  public var errorDescription: Swift.String? {
+    get
+  }
+}
+public struct InvalidHTTPResponseError : Swift.Error, Foundation.LocalizedError {
+  public var errorDescription: Swift.String? {
+    get
+  }
+}
+public protocol FeatureManagerInterface {
+  func start(uniqueKey: Swift.String)
+  func sendEvent(data: [Swift.String : Any])
+}
+public protocol TimeBasedCacheInterface {
+  func getLastCollectionTime(for featureName: Swift.String) -> Foundation.Date?
+  func setLastCollectionTime(_ date: Foundation.Date, for featureName: Swift.String)
+  func shouldCollectFreshData(for featureName: Swift.String, cacheDuration: Foundation.TimeInterval) -> Swift.Bool
+}
