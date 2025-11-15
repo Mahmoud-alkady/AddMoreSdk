@@ -1,0 +1,312 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 6.0.3 effective-4.2 (swiftlang-6.0.3.1.10 clang-1600.0.30.1)
+// swift-module-flags: -target x86_64-apple-ios12.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 4.2 -enforce-exclusivity=checked -O -enable-bare-slash-regex -module-name AdMoreSdk
+import AdSupport
+import AppTrackingTransparency
+import SystemConfiguration.CaptiveNetwork
+import CommonCrypto
+import Contacts
+import CoreBluetooth
+import CoreData
+import CoreLocation
+import CoreMotion
+import CoreNFC
+import CoreTelephony
+import DeviceActivity
+import EventKit
+import FamilyControls
+import Foundation
+import HealthKit
+import ImageIO
+import ManagedSettings
+import MediaPlayer
+import MessageUI
+import MusicKit
+import Network
+import Photos
+import Security
+import StoreKit
+import Swift
+import SwiftUI
+import SystemConfiguration
+import UIKit
+import WebKit
+import _Concurrency
+import _CoreNFC_UIKit
+import _StringProcessing
+import _SwiftConcurrencyShims
+public class AdMore : AdMoreSdk.FeatureManagerInterface {
+  public static let shared: AdMoreSdk.AdMore
+  public init()
+  public func start(uniqueKey: Swift.String)
+  public func sendEvent(data: [Swift.String : Any] = [:])
+  public func bannerView(adType: AdMoreSdk.AdType, adUnitId: Swift.String, adPlacementId: Swift.String) -> AdMoreSdk.AdDisplayView
+  public func presentFullScreenAd(adType: AdMoreSdk.AdType, adUnitId: Swift.String, adPlacementId: Swift.String, delegate: (any AdMoreSdk.AdDisplayViewDelegate)?)
+  @objc deinit
+}
+public struct InvalidDataResponse : Swift.Error, Foundation.LocalizedError {
+  public var errorDescription: Swift.String? {
+    get
+  }
+}
+public struct InvalidHTTPResponseError : Swift.Error, Foundation.LocalizedError {
+  public var errorDescription: Swift.String? {
+    get
+  }
+}
+public protocol FeatureManagerInterface {
+  func start(uniqueKey: Swift.String)
+  func sendEvent(data: [Swift.String : Any])
+}
+public protocol TimeBasedCacheInterface {
+  func getLastCollectionTime(for featureName: Swift.String) -> Foundation.Date?
+  func setLastCollectionTime(_ date: Foundation.Date, for featureName: Swift.String)
+  func shouldCollectFreshData(for featureName: Swift.String, cacheDuration: Foundation.TimeInterval) -> Swift.Bool
+}
+@objc @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency public class AdDisplayView : UIKit.UIView {
+  @_Concurrency.MainActor @preconcurrency weak public var delegate: (any AdMoreSdk.AdDisplayViewDelegate)? {
+    get
+    set
+  }
+  @_Concurrency.MainActor @preconcurrency public init(adType: AdMoreSdk.AdType, adUnitId: Swift.String, adPlacementId: Swift.String, adPublisherId: Swift.String, adFormat: AdMoreSdk.AdFormat)
+  @objc deinit
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public func layoutSubviews()
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public func didMoveToSuperview()
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public func didMoveToWindow()
+}
+public enum ContextManagerError<ManagedObject> : Swift.Error, Foundation.LocalizedError where ManagedObject : CoreData.NSManagedObject {
+  case fetchById
+  case count
+  case fetchAll
+  case createObject
+  case fetchRequest
+  case save
+  public var errorDescription: Swift.String? {
+    get
+  }
+  public static func == (a: AdMoreSdk.ContextManagerError<ManagedObject>, b: AdMoreSdk.ContextManagerError<ManagedObject>) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+#if compiler(>=5.3) && $NoncopyableGenerics
+extension Swift.Optional : @retroactive Swift.CustomStringConvertible where Wrapped == Swift.String {
+  public var description: Swift.String {
+    get
+  }
+}
+#elseif compiler(>=5.3) && $RetroactiveAttribute
+extension Swift.Optional : @retroactive Swift.CustomStringConvertible where Wrapped == Swift.String {
+  public var description: Swift.String {
+    get
+  }
+}
+#else
+extension Swift.Optional : Swift.CustomStringConvertible where Wrapped == Swift.String {
+  public var description: Swift.String {
+    get
+  }
+}
+#endif
+public enum AdFormat : Swift.String, Swift.CaseIterable, Swift.Codable {
+  case banner
+  case interstitial
+  case rewarded
+  public init?(rawValue: Swift.String)
+  public typealias AllCases = [AdMoreSdk.AdFormat]
+  public typealias RawValue = Swift.String
+  nonisolated public static var allCases: [AdMoreSdk.AdFormat] {
+    get
+  }
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public enum AdType : Swift.String, Swift.CaseIterable, Swift.Codable {
+  case image
+  case video
+  case html
+  public init?(rawValue: Swift.String)
+  public typealias AllCases = [AdMoreSdk.AdType]
+  public typealias RawValue = Swift.String
+  nonisolated public static var allCases: [AdMoreSdk.AdType] {
+    get
+  }
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public enum AdError : Swift.Error, Foundation.LocalizedError {
+  case networkError(Swift.String)
+  case webViewError(Swift.String)
+  case configurationError(Swift.String)
+  case verificationFailed
+  case invalidAdUnit
+  case adExpired
+  case unknown(Swift.String)
+  public var errorDescription: Swift.String? {
+    get
+  }
+  public var errorCode: Swift.String {
+    get
+  }
+  public var statusCode: Swift.Int {
+    get
+  }
+}
+public protocol AdDisplayViewDelegate : AnyObject {
+  func adDisplayViewDidLoad(_ adView: AdMoreSdk.AdDisplayView, with data: AdMoreSdk.AdLoadedData)
+  func adDisplayView(_ adView: AdMoreSdk.AdDisplayView, didFailWithError error: AdMoreSdk.AdError, data: AdMoreSdk.AdFailedData)
+  func adDisplayViewDidClick(_ adView: AdMoreSdk.AdDisplayView, with data: AdMoreSdk.AdClickedData)
+  func adDisplayViewDidComplete(_ adView: AdMoreSdk.AdDisplayView, with data: AdMoreSdk.AdCompletedData)
+  func adDisplayView(_ adView: AdMoreSdk.AdDisplayView, didEarnReward amount: Swift.Double, data: AdMoreSdk.AdRewardData)
+  func adDisplayViewDidPause(_ adView: AdMoreSdk.AdDisplayView, with data: AdMoreSdk.AdPausedData)
+  func adDisplayViewDidResume(_ adView: AdMoreSdk.AdDisplayView, with data: AdMoreSdk.AdResumedData)
+  func adDisplayViewDidTimeout(_ adView: AdMoreSdk.AdDisplayView, with data: AdMoreSdk.AdTimeoutData)
+  func adDisplayViewDidSkip(_ adView: AdMoreSdk.AdDisplayView, with data: AdMoreSdk.AdSkipData)
+  func adDisplayView(_ adView: AdMoreSdk.AdDisplayView, didUpdateProgress data: AdMoreSdk.AdProgressData)
+  func adDisplayViewDidClose(_ adView: AdMoreSdk.AdDisplayView)
+}
+public struct AdLoadedData {
+  public let sessionId: Swift.String?
+  public let adId: Swift.String?
+  public let timestamp: Foundation.Date?
+  public init(sessionId: Swift.String? = nil, adId: Swift.String? = nil, timestamp: Foundation.Date? = nil)
+}
+public struct AdFailedData {
+  public let sessionId: Swift.String?
+  public let adId: Swift.String?
+  public let timestamp: Foundation.Date?
+  public let errorMessage: Swift.String?
+  public init(sessionId: Swift.String? = nil, adId: Swift.String? = nil, timestamp: Foundation.Date? = nil, errorMessage: Swift.String? = nil)
+}
+public struct AdClickedData {
+  public let sessionId: Swift.String?
+  public let adId: Swift.String?
+  public let timestamp: Foundation.Date?
+  public let clickCount: Swift.Int?
+  public let openUrl: Swift.String?
+  public let clickUrl: Swift.String?
+  public init(sessionId: Swift.String? = nil, adId: Swift.String? = nil, timestamp: Foundation.Date? = nil, clickCount: Swift.Int? = nil, openUrl: Swift.String? = nil, clickUrl: Swift.String? = nil)
+}
+public struct AdCompletedData {
+  public let sessionId: Swift.String?
+  public let adId: Swift.String?
+  public let timestamp: Foundation.Date?
+  public let message: Swift.String?
+  public let statusCode: Swift.String?
+  public init(sessionId: Swift.String? = nil, adId: Swift.String? = nil, timestamp: Foundation.Date? = nil, message: Swift.String? = nil, statusCode: Swift.String? = nil)
+}
+public struct AdRewardData {
+  public let sessionId: Swift.String?
+  public let adId: Swift.String?
+  public let timestamp: Foundation.Date?
+  public let amount: Swift.Double?
+  public init(sessionId: Swift.String? = nil, adId: Swift.String? = nil, timestamp: Foundation.Date? = nil, amount: Swift.Double? = nil)
+}
+public struct AdPausedData {
+  public let sessionId: Swift.String?
+  public let adId: Swift.String?
+  public let timestamp: Foundation.Date?
+  public let progress: Swift.Int?
+  public init(sessionId: Swift.String? = nil, adId: Swift.String? = nil, timestamp: Foundation.Date? = nil, progress: Swift.Int? = nil)
+}
+public struct AdResumedData {
+  public let sessionId: Swift.String?
+  public let adId: Swift.String?
+  public let timestamp: Foundation.Date?
+  public let progress: Swift.Int?
+  public init(sessionId: Swift.String? = nil, adId: Swift.String? = nil, timestamp: Foundation.Date? = nil, progress: Swift.Int? = nil)
+}
+public struct AdTimeoutData {
+  public let sessionId: Swift.String?
+  public let adId: Swift.String?
+  public let timestamp: Foundation.Date?
+  public let progress: Swift.Int?
+  public init(sessionId: Swift.String? = nil, adId: Swift.String? = nil, timestamp: Foundation.Date? = nil, progress: Swift.Int? = nil)
+}
+public struct AdSkipData {
+  public let sessionId: Swift.String?
+  public let adId: Swift.String?
+  public let timestamp: Foundation.Date?
+  public let progress: Swift.Int?
+  public init(sessionId: Swift.String? = nil, adId: Swift.String? = nil, timestamp: Foundation.Date? = nil, progress: Swift.Int? = nil)
+}
+public struct AdProgressData {
+  public let sessionId: Swift.String?
+  public let adId: Swift.String?
+  public let timestamp: Foundation.Date?
+  public let progress: Swift.Int?
+  public init(sessionId: Swift.String? = nil, adId: Swift.String? = nil, timestamp: Foundation.Date? = nil, progress: Swift.Int? = nil)
+}
+public struct AdCloseData {
+  public let sessionId: Swift.String?
+  public let adId: Swift.String?
+  public let timestamp: Foundation.Date?
+  public let message: Swift.String?
+  public init(sessionId: Swift.String? = nil, adId: Swift.String? = nil, timestamp: Foundation.Date? = nil, message: Swift.String? = nil)
+}
+public struct AdNextAdData {
+  public let sessionId: Swift.String?
+  public let adId: Swift.String?
+  public let timestamp: Foundation.Date?
+  public let message: Swift.String?
+  public let statusCode: Swift.String?
+  public init(sessionId: Swift.String? = nil, adId: Swift.String? = nil, timestamp: Foundation.Date? = nil, message: Swift.String? = nil, statusCode: Swift.String? = nil)
+}
+public struct AdCanPlayData {
+  public let sessionId: Swift.String?
+  public let adId: Swift.String?
+  public let timestamp: Foundation.Date?
+  public let message: Swift.String?
+  public init(sessionId: Swift.String? = nil, adId: Swift.String? = nil, timestamp: Foundation.Date? = nil, message: Swift.String? = nil)
+}
+@_inheritsConvenienceInitializers @objc(ActionObject) public class ActionObject : CoreData.NSManagedObject {
+  @objc override dynamic public init(entity: CoreData.NSEntityDescription, insertInto context: CoreData.NSManagedObjectContext?)
+  @objc deinit
+}
+extension AdMoreSdk.ActionObject {
+  @nonobjc public class func fetchRequest() -> CoreData.NSFetchRequest<AdMoreSdk.ActionObject>
+  @objc @NSManaged dynamic public var actionType: Swift.String? {
+    @objc get
+    @objc set
+  }
+  @objc @NSManaged dynamic public var data: Foundation.Data? {
+    @objc get
+    @objc set
+  }
+  @objc @NSManaged dynamic public var session: AdMoreSdk.SessionObject? {
+    @objc get
+    @objc set
+  }
+}
+@_inheritsConvenienceInitializers @objc(SessionObject) public class SessionObject : CoreData.NSManagedObject {
+  @objc override dynamic public init(entity: CoreData.NSEntityDescription, insertInto context: CoreData.NSManagedObjectContext?)
+  @objc deinit
+}
+extension AdMoreSdk.SessionObject {
+  @nonobjc public class func fetchRequest() -> CoreData.NSFetchRequest<AdMoreSdk.SessionObject>
+  @objc @NSManaged dynamic public var sessionId: Swift.String? {
+    @objc get
+    @objc set
+  }
+  @objc @NSManaged dynamic public var actions: Foundation.NSSet? {
+    @objc get
+    @objc set
+  }
+}
+extension AdMoreSdk.SessionObject {
+  @objc(addActionsObject:) @NSManaged dynamic public func addToActions(_ value: AdMoreSdk.ActionObject)
+  @objc(removeActionsObject:) @NSManaged dynamic public func removeFromActions(_ value: AdMoreSdk.ActionObject)
+  @objc(addActions:) @NSManaged dynamic public func addToActions(_ values: Foundation.NSSet)
+  @objc(removeActions:) @NSManaged dynamic public func removeFromActions(_ values: Foundation.NSSet)
+}
+extension AdMoreSdk.ContextManagerError : Swift.Equatable {}
+extension AdMoreSdk.ContextManagerError : Swift.Hashable {}
+extension AdMoreSdk.AdFormat : Swift.Equatable {}
+extension AdMoreSdk.AdFormat : Swift.Hashable {}
+extension AdMoreSdk.AdFormat : Swift.RawRepresentable {}
+extension AdMoreSdk.AdType : Swift.Equatable {}
+extension AdMoreSdk.AdType : Swift.Hashable {}
+extension AdMoreSdk.AdType : Swift.RawRepresentable {}
